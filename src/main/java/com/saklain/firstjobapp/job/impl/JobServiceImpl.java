@@ -15,7 +15,6 @@ public class JobServiceImpl implements JobService {
 
     //private List<Job> jobs = new ArrayList<>();
     JobRepository jobRespository;
-    private Long nextId = 1L;
 
     public JobServiceImpl(JobRepository jobRespository) {
         this.jobRespository = jobRespository;
@@ -29,10 +28,9 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void createJob(Job job) {
-        job.setId(nextId++);
-        jobRespository.save(job);
+        jobRespository.save(job);  // ✅ Let JPA auto-generate ID
+    }
 
-    }//2:29
 
     @Override
     public Job getJobById(Long id) {
@@ -66,6 +64,7 @@ public class JobServiceImpl implements JobService {
 //        }
 //        return false;
     }
+    //continue for 4:22:06
 
     @Override
     public boolean updateJob(Long id, Job updatedJob) {
@@ -78,6 +77,7 @@ public class JobServiceImpl implements JobService {
                 job.setMinSalary(updatedJob.getMinSalary());
                 job.setMaxSalary(updatedJob.getMaxSalary());
                 job.setLocation(updatedJob.getLocation());
+                jobRespository.save(job);
                 return true;
             }
 
