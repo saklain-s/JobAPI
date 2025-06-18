@@ -1,5 +1,6 @@
 package com.saklain.firstjobapp.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.saklain.firstjobapp.job.Job;
 import jakarta.persistence.*;
 
@@ -13,7 +14,8 @@ public class Company {
     private String name;
     private String description;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
     private List<Job> jobs;
     // One to many creates a separate table in the sql for relation
 

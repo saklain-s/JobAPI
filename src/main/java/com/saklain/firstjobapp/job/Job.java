@@ -1,5 +1,6 @@
 package com.saklain.firstjobapp.job;
 
+import com.saklain.firstjobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,6 +23,8 @@ public class Job {
         this.minSalary = minSalary;
         this.location = location;
     }
+    @ManyToOne
+    private Company company;
 
     public Job() {
     }
@@ -72,5 +75,13 @@ public class Job {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
