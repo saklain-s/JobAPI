@@ -2,6 +2,7 @@ package com.saklain.firstjobapp.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.saklain.firstjobapp.job.Job;
+import com.saklain.firstjobapp.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,10 +20,18 @@ public class Company {
     private List<Job> jobs;
     // One to many creates a separate table in the sql for relation
 
-
-   // private List<Reviews> reviews;
+    @OneToMany(mappedBy = "company")
+   private List<Review> reviews;
 
     public Company() {
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public Long getId() {
