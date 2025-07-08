@@ -1,11 +1,13 @@
+version: '3.8'
+
 services:
   postgres:
     container_name: postgres_container
     image: postgres
     environment:
       POSTGRES_USER: saklainshaik
-      POSTGRES_PASSWORD: saklain4S
-      POSTGRES_DB: jobapp           # ✅ Add this line
+      POSTGRES_PASSWORD: saklain123
+      POSTGRES_DB: jobapp
       PGDATA: /data/postgres
     volumes:
       - postgres:/data/postgres
@@ -15,13 +17,12 @@ services:
       - postgres
     restart: unless-stopped
 
-
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
       - pgadmin:/var/lib/pgadmin
@@ -30,6 +31,8 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+    depends_on:
+      - postgres
 
 networks:
   postgres:
